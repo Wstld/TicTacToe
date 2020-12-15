@@ -13,6 +13,7 @@ class ViewController: UIViewController{
     override func loadView() {
         //Main Canvas.
         view = UIView()
+        let test = "test"
         view.backgroundColor = .white
         
         //Sub views instances and config.
