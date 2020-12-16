@@ -13,74 +13,65 @@ class GameBoard: UIView {
     
     
     lazy var btn1:UIButton = {
-        let btn1 = UIButton(type: .custom)
-        btn1.backgroundColor = .blue
-        btn1.translatesAutoresizingMaskIntoConstraints = false
-        return btn1
+        let btn = UIButton()
+        btn.backgroundColor = .blue
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.tag = 0
+        return btn
         
     }()
     lazy var btn2:UIButton = {
-        let btn2 = UIButton()
-        btn2.backgroundColor = .green
-        btn2.translatesAutoresizingMaskIntoConstraints = false
-        btn2.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        btn2.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
-        return btn2
+        let btn = UIButton()
+        btn.backgroundColor = .green
+        btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.tag = 1
+        return btn
     }()
     lazy var btn3:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .blue
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        btn.tag = 2
         return btn
     }()
     lazy var btn4:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .green
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        btn.tag = 3
         return btn
     }()
     lazy var btn5:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .blue
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        btn.tag = 4
         return btn
     }()
     lazy var btn6:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .green
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        btn.tag = 5
         return btn
     }()
     lazy var btn7:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .blue
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return btn
     }()
     lazy var btn8:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .green
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
         return btn
     }()
     lazy var btn9:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .blue
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        btn.setContentCompressionResistancePriority(.defaultLow, for: .vertical)
+        btn.tag = 6
         return btn
     }()
     
