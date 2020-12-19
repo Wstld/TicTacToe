@@ -16,7 +16,7 @@ class GameBoard: UIView {
         let btn = UIButton()
         btn.backgroundColor = .blue
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tag = 0
+        btn.tag = 1
         return btn
         
     }()
@@ -24,54 +24,56 @@ class GameBoard: UIView {
         let btn = UIButton()
         btn.backgroundColor = .green
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tag = 1
+        btn.tag = 2
         return btn
     }()
     lazy var btn3:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .blue
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tag = 2
+        btn.tag = 3
         return btn
     }()
     lazy var btn4:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .green
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tag = 3
+        btn.tag = 4
         return btn
     }()
     lazy var btn5:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .blue
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tag = 4
+        btn.tag = 5
         return btn
     }()
     lazy var btn6:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .green
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tag = 5
+        btn.tag = 6
         return btn
     }()
     lazy var btn7:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .blue
         btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.tag = 7
         return btn
     }()
     lazy var btn8:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .green
         btn.translatesAutoresizingMaskIntoConstraints = false
+        btn.tag = 8
         return btn
     }()
     lazy var btn9:UIButton = {
         let btn = UIButton()
         btn.backgroundColor = .blue
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.tag = 6
+        btn.tag = 9
         return btn
     }()
     
