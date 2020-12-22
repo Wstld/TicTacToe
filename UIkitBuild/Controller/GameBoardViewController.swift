@@ -9,6 +9,7 @@ import UIKit
 
 class GameBoardViewController: UIViewController{
     var game = GameModel()
+    var currentPlayerLable:UILabel!
     var gameBoard:GameBoard!
     var textLable:UILabel!
     var gameOver = false
@@ -17,9 +18,9 @@ class GameBoardViewController: UIViewController{
         //Main Canvas.
         view = UIView()
         view.backgroundColor = .white
-        self.setupGameboard(view:view)
-      
-            
+
+        self.setupView(view:view)
+ 
     }
 
     override func viewDidLoad() {
@@ -28,20 +29,19 @@ class GameBoardViewController: UIViewController{
     
     }
     
-   
-    func resetGame(){
-        //reset game logic
-        game = GameModel()
-        //reset view.
-        gameBoard.removeFromSuperview()
-        setupGameboard(view: self.view)
-    }
-    
-    private func setupGameboard(view:UIView){
-         //Sub views instances and config.
-         gameBoard = GameBoard(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width - 30, height: UIScreen.main.bounds.width - 30))
+    private func setupView(view:UIView){
+        
+        let screenWidth:CGFloat = UIScreen.main.bounds.width < UIScreen.main.bounds.height ? UIScreen.main.bounds.width : UIScreen.main.bounds.height
+        
+        //Sub views instances and config.
+        gameBoard = GameBoard(frame: CGRect(x: 0, y: 0, width: screenWidth - 30, height: screenWidth - 30))
          gameBoard.translatesAutoresizingMaskIntoConstraints = false
-         
+ 
+        currentPlayerLable = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth/2, height: screenWidth/5))
+        currentPlayerLable.text = game.currentPlayer
+        currentPlayerLable.font = UIFont.systemFont(ofSize: 40.0)
+        currentPlayerLable.translatesAutoresizingMaskIntoConstraints = false
+        
          //Set onClick action for gameboard
          gameBoard.clickAction = { (btn:UIButton) in
             //Marker logic for players
@@ -55,9 +55,10 @@ class GameBoardViewController: UIViewController{
             }
             //Updates game board array and checks for winner
             self.game.updateGameBoard(btnNumber: btn.tag)
+          
             if self.game.winner {
                 //show new screen with winner popup and wanna play again.
-                self.resetGame()
+                 self.resetGame()
             }else if self.game.numOfTurns >= 9 && !self.game.winner {
                 //show popup with draw and options to play again.
                 self.resetGame()
@@ -70,18 +71,33 @@ class GameBoardViewController: UIViewController{
             }else{
                 self.game.currentPlayer = self.game.Player1
             }
+            //Update current player lable text
+            self.currentPlayerLable.text = self.game.currentPlayer
              }
          
          //Sub views added to main canvas.
          view.addSubview(gameBoard)
+        view.addSubview(currentPlayerLable)
          
          //Constraints for all subviews.
          NSLayoutConstraint.activate([
              //gameboard
              gameBoard.topAnchor.constraint(equalTo: view.topAnchor,constant: UIScreen.main.bounds.height * 0.2),
-             gameBoard.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+             gameBoard.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            //current player lable
+            currentPlayerLable.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor,constant: 10),
+            currentPlayerLable.centerXAnchor.constraint(equalTo: view.centerXAnchor)
              
          ])
+    }
+    
+    func resetGame(){
+        //reset game logic
+        game = GameModel()
+        //reset view.
+        currentPlayerLable.removeFromSuperview()
+        gameBoard.removeFromSuperview()
+        setupView(view: self.view)
     }
    
 

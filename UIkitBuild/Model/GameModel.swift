@@ -9,7 +9,7 @@ import Foundation
 struct GameModel {
     let Player1 = "X"
     let Player2 = "O"
-    var currentPlayer = "X"
+    lazy var currentPlayer:String = self.getRandomPlayer()
     var winner = false
     var numOfTurns = 0 
     var gameBoard = [
@@ -101,10 +101,17 @@ struct GameModel {
                 return
             }
         }
-        
-        
-        
-        
-        
+    }
+   func getRandomPlayer() -> String{
+    let randNum = Int.random(in: 0...10)
+        print(randNum)
+        var player = ""
+    switch randNum {
+    case 0...4:
+        player = Player1
+    default:
+        player = Player2
+    }
+   return player
     }
 }
