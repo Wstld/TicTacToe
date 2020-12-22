@@ -11,6 +11,7 @@ class GameBoardViewController: UIViewController{
     var game = GameModel()
     var currentPlayerLable:UILabel!
     var gameBoard:GameBoard!
+    var scoreBoard = ScoreModel()
     
     var statsHeadline:UILabel!
     
@@ -67,12 +68,12 @@ class GameBoardViewController: UIViewController{
         player1ScoreLable = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth/3, height: screenWidth/6))
         player1ScoreLable.font = UIFont.systemFont(ofSize: 30)
         player1ScoreLable.translatesAutoresizingMaskIntoConstraints = false
-        player1ScoreLable.text = "10"
+        player1ScoreLable.text = String(self.scoreBoard.player1)
         
         player2ScoreLable = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth/3, height: screenWidth/6))
         player2ScoreLable.font = UIFont.systemFont(ofSize: 30)
         player2ScoreLable.translatesAutoresizingMaskIntoConstraints = false
-        player2ScoreLable.text = "10"
+        player2ScoreLable.text = String(self.scoreBoard.player2)
         
         
         
@@ -91,7 +92,13 @@ class GameBoardViewController: UIViewController{
             self.game.updateGameBoard(btnNumber: btn.tag)
           
             if self.game.winner {
+                if self.game.currentPlayer == self.game.Player1{
+                    self.scoreBoard.addWin(player: "X")
+                }else{
+                    self.scoreBoard.addWin(player: "O")
+                }
                 //show new screen with winner popup and wanna play again.
+                
                  self.resetGame()
             }else if self.game.numOfTurns >= 9 && !self.game.winner {
                 //show popup with draw and options to play again.
