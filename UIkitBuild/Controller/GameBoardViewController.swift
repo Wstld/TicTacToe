@@ -153,8 +153,9 @@ class GameBoardViewController: UIViewController{
         //reset game logic
         game = GameModel()
         //reset view.
-        currentPlayerLable.removeFromSuperview()
-        gameBoard.removeFromSuperview()
+        for view in self.view.subviews {
+            view.removeFromSuperview()
+        }
         setupView(view: self.view)
     }
    
