@@ -10,7 +10,7 @@ import UIKit
 class GameBoard: UIView {
     var clickAction:((UIButton) -> Void)?
     let screenSize = UIScreen.main.bounds
-    
+    var allBtns = [UIButton]()
     
     lazy var btn1:UIButton = {
         let btn = UIButton()
@@ -78,6 +78,7 @@ class GameBoard: UIView {
     }()
     
     
+    
     private func setConstraints(){
         NSLayoutConstraint.activate([
             //btn1
@@ -139,6 +140,18 @@ class GameBoard: UIView {
         btn9.addTarget(self, action: #selector(addMarker), for: .touchUpInside)
         
     }
+    private func addAllBtnsToArray(){
+        allBtns.append(btn1)
+        allBtns.append(btn2)
+        allBtns.append(btn3)
+        allBtns.append(btn4)
+        allBtns.append(btn5)
+        allBtns.append(btn6)
+        allBtns.append(btn7)
+        allBtns.append(btn8)
+        allBtns.append(btn9)
+        
+    }
     @objc func addMarker(sender:UIButton){
        
         getPlayerAndSetMark(sender: sender)
@@ -151,12 +164,14 @@ class GameBoard: UIView {
         super.init(frame: frame)
             setupView()
             setActions()
+            addAllBtnsToArray()
     }
     //initWithCode to init view from xib or storyboard
     required init?(coder aDecoder: NSCoder) {
       super.init(coder: aDecoder)
         setupView()
         setActions()
+        addAllBtnsToArray()
     }
     
     //common func to init our view

@@ -75,6 +75,7 @@ class MainViewController: UIViewController {
         startOnePlayerGameBtn.translatesAutoresizingMaskIntoConstraints = false
         startOnePlayerGameBtn.backgroundColor = .lightGray
         startOnePlayerGameBtn.addTarget(self, action: #selector(goToGame), for: .touchUpInside)
+        startOnePlayerGameBtn.tag = 1
         
         pVcBtn = UIButton(type: .custom)
         pVcBtn.setTitle("1 Player", for: .normal)
@@ -152,7 +153,7 @@ class MainViewController: UIViewController {
     
     }
     
-    @objc func goToGame(){
+    @objc func goToGame(sender:UIButton){
         //init VC
         let gameboard = self.storyboard?.instantiateViewController(withIdentifier: "GameBoard") as! GameBoardViewController
         
@@ -164,6 +165,15 @@ class MainViewController: UIViewController {
         if !nameInput2.text!.isEmpty {
             gameboard.game.player2 = nameInput2.text!
         }
+        if sender.tag == 1 {
+            gameboard.game.soloPlayer = true
+            gameboard.game.player2 = "Computer"
+            if !nameInputOnePlayer.text!.isEmpty {
+                gameboard.game.player1 = nameInputOnePlayer.text!
+            }
+          
+        }
+            
         
         //Navigate to VC
         self.navigationController!.pushViewController(gameboard, animated: true)

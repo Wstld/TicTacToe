@@ -20,7 +20,6 @@ class GameBoardViewController: UIViewController{
     
     var player1ScoreLable:UILabel!
     var player2ScoreLable:UILabel!
-    
     override func loadView() {
         
         //Main Canvas.
@@ -33,7 +32,17 @@ class GameBoardViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        if game.soloPlayer && game.currentPlayer == game.player2{
+            let btn = game.computerTurn()
+            
+            let button = gameBoard.allBtns.filter{
+                button in return button.tag == btn
+            }
+            
+            button[0].sendActions(for: .touchUpInside)
+        }
         // Do any additional setup after loading the view.
+        
     
     }
     
@@ -106,15 +115,29 @@ class GameBoardViewController: UIViewController{
                 
             }
   
-            //Alternates turns
-            if self.game.currentPlayer == self.game.player1 {
-                self.game.currentPlayer = self.game.player2
-            }else{
-                self.game.currentPlayer = self.game.player1
-            }
+            //Alternates turns player vs player
+                if self.game.currentPlayer == self.game.player1 {
+                    self.game.currentPlayer = self.game.player2
+                }else{
+                    self.game.currentPlayer = self.game.player1
+                }
+            
+            
             //Update current player lable text
             self.currentPlayerLable.text = self.game.currentPlayer
-             }
+            
+            //If solo game runs computers turn
+            if self.game.soloPlayer && self.game.currentPlayer == self.game.player2{
+                let btn = self.game.computerTurn()
+                print(btn)
+                let button = self.gameBoard.allBtns.filter{
+                    button in return button.tag == btn
+                    
+                }
+                button[0].sendActions(for: .touchUpInside)
+            }
+            
+    }
          
          //Sub views added to main canvas.
          view.addSubview(gameBoard)
@@ -167,6 +190,11 @@ class GameBoardViewController: UIViewController{
         var newGame = GameModel()
         newGame.player1 = game.player1
         newGame.player2 = game.player2
+        
+        if game.soloPlayer {
+            newGame.soloPlayer = true
+        }
+        
         game = newGame
         //reset view.
         for view in self.view.subviews {

@@ -7,6 +7,7 @@
 
 import Foundation
 struct GameModel {
+    var soloPlayer = false
     var player1 = "X"
     var player2 = "O"
     lazy var currentPlayer:String = self.getRandomPlayer()
@@ -38,7 +39,7 @@ struct GameModel {
         return gameBoard[0][2] + gameBoard[1][1] + gameBoard[2][0]
     }
     
-    mutating func updateGameBoard(btnNumber num:Int){
+    func getRowAndColumn(_ num:Int) -> (row:Int,column:Int){
         var row = 0
         var btnInRow = 0
         
@@ -63,11 +64,18 @@ struct GameModel {
         default:
             break
         }
+        return (row,btnInRow)
+    }
+    
+    mutating func updateGameBoard(btnNumber num:Int){
+        let move = getRowAndColumn(num)
+      
+        gameBoard[move.row][move.column] = currentPlayer == player1 ? 1 : 5
         
-        gameBoard[row][btnInRow] = currentPlayer == player1 ? 1 : 5
         numOfTurns += 1
+        
         if numOfTurns > 4 {
-            checkForWinner(row: row,column:btnInRow)
+            checkForWinner(row: move.row,column:move.column)
             print(winner)
         }
         
@@ -102,9 +110,19 @@ struct GameModel {
             }
         }
     }
+    
+    mutating func computerTurn() -> Int{
+        let randomInt = Int.random(in: 1...9)
+        let move = getRowAndColumn(randomInt)
+        if gameBoard[move.row][move.column] != 0 {
+            return computerTurn()
+        }
+        
+        return randomInt
+    }
+    
    func getRandomPlayer() -> String{
     let randNum = Int.random(in: 0...10)
-        print(randNum)
         var player = ""
     switch randNum {
     case 0...4:
