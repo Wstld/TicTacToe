@@ -7,8 +7,8 @@
 
 import Foundation
 struct GameModel {
-    let Player1 = "X"
-    let Player2 = "O"
+    var player1 = "X"
+    var player2 = "O"
     lazy var currentPlayer:String = self.getRandomPlayer()
     var winner = false
     var numOfTurns = 0 
@@ -64,7 +64,7 @@ struct GameModel {
             break
         }
         
-        gameBoard[row][btnInRow] = currentPlayer == Player1 ? 1 : 5
+        gameBoard[row][btnInRow] = currentPlayer == player1 ? 1 : 5
         numOfTurns += 1
         if numOfTurns > 4 {
             checkForWinner(row: row,column:btnInRow)
@@ -75,7 +75,7 @@ struct GameModel {
     
     mutating func checkForWinner(row:Int,column:Int){
         var winSum:Int{
-            return currentPlayer == Player1 ? 3 : 15
+            return currentPlayer == player1 ? 3 : 15
         }
         if rowsValues[row] == winSum || columnValues[column] == winSum {
             winner = true
@@ -108,9 +108,9 @@ struct GameModel {
         var player = ""
     switch randNum {
     case 0...4:
-        player = Player1
+        player = player1
     default:
-        player = Player2
+        player = player2
     }
    return player
     }

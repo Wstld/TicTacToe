@@ -153,7 +153,19 @@ class MainViewController: UIViewController {
     }
     
     @objc func goToGame(){
+        //init VC
         let gameboard = self.storyboard?.instantiateViewController(withIdentifier: "GameBoard") as! GameBoardViewController
+        
+        //Check if input is empty. If not add player names
+        if !nameInput1.text!.isEmpty {
+            gameboard.game.player1 = nameInput1.text!
+        }
+        
+        if !nameInput2.text!.isEmpty {
+            gameboard.game.player2 = nameInput2.text!
+        }
+        
+        //Navigate to VC
         self.navigationController!.pushViewController(gameboard, animated: true)
     }
     
@@ -162,10 +174,8 @@ class MainViewController: UIViewController {
             pVpContainer.isHidden = false
             pVcBtnTop.constant += pVpContainer.frame.height
             updateViewConstraints()
-            
-            
-        
             pVcBtn.updateConstraints()
+            
         }else{
             pVpContainer.isHidden = true
             pVcBtnTop.constant -= pVpContainer.frame.height

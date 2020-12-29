@@ -58,12 +58,12 @@ class GameBoardViewController: UIViewController{
         player1NameLable = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth/3, height: screenWidth/6))
         player1NameLable.translatesAutoresizingMaskIntoConstraints = false
         player1NameLable.font = UIFont.systemFont(ofSize: 30)
-        player1NameLable.text = self.game.Player1 + ":"
+        player1NameLable.text = self.game.player1 + ":"
         
         player2NameLable = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth/3, height: screenWidth/6))
         player2NameLable.translatesAutoresizingMaskIntoConstraints = false
         player2NameLable.font = UIFont.systemFont(ofSize: 30)
-        player2NameLable.text = self.game.Player2 + ":"
+        player2NameLable.text = self.game.player2 + ":"
         
         player1ScoreLable = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth/3, height: screenWidth/6))
         player1ScoreLable.font = UIFont.systemFont(ofSize: 30)
@@ -80,7 +80,7 @@ class GameBoardViewController: UIViewController{
          //Set onClick action for gameboard
          gameBoard.clickAction = { (btn:UIButton) in
             //Marker logic for players
-            if self.game.currentPlayer == self.game.Player1 {
+            if self.game.currentPlayer == self.game.player1 {
                 btn.setImage(UIImage(named: "symbolX.png"),for: .normal)
                 btn.isUserInteractionEnabled = false
             }else{
@@ -92,7 +92,7 @@ class GameBoardViewController: UIViewController{
             self.game.updateGameBoard(btnNumber: btn.tag)
           
             if self.game.winner {
-                if self.game.currentPlayer == self.game.Player1{
+                if self.game.currentPlayer == self.game.player1{
                     self.scoreBoard.addWin(player: "X")
                 }else{
                     self.scoreBoard.addWin(player: "O")
@@ -107,10 +107,10 @@ class GameBoardViewController: UIViewController{
             }
   
             //Alternates turns
-            if self.game.currentPlayer == self.game.Player1 {
-                self.game.currentPlayer = self.game.Player2
+            if self.game.currentPlayer == self.game.player1 {
+                self.game.currentPlayer = self.game.player2
             }else{
-                self.game.currentPlayer = self.game.Player1
+                self.game.currentPlayer = self.game.player1
             }
             //Update current player lable text
             self.currentPlayerLable.text = self.game.currentPlayer
@@ -124,6 +124,12 @@ class GameBoardViewController: UIViewController{
         view.addSubview(statsHeadline)
         view.addSubview(player2ScoreLable)
         view.addSubview(player1ScoreLable)
+        
+        //find widest player name (used to anchor score lables)
+        var widestNameLable:UILabel {
+            return player1NameLable.text!.count > player2NameLable.text!.count ? player1NameLable : player2NameLable
+        }
+        
          
          //Constraints for all subviews.
          NSLayoutConstraint.activate([
@@ -139,7 +145,7 @@ class GameBoardViewController: UIViewController{
             player2NameLable.bottomAnchor.constraint(equalTo:view.layoutMarginsGuide.bottomAnchor,constant: screenWidth * -0.1),
             player2NameLable.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
             //player 2 score lable
-            player2ScoreLable.leftAnchor.constraint(equalTo: player2NameLable.rightAnchor,constant: 15),
+            player2ScoreLable.leftAnchor.constraint(equalTo: widestNameLable.rightAnchor,constant: 15),
             player2ScoreLable.bottomAnchor.constraint(equalTo: player2NameLable.bottomAnchor),
             
             //player1 name lable
@@ -158,7 +164,10 @@ class GameBoardViewController: UIViewController{
     
     func resetGame(){
         //reset game logic
-        game = GameModel()
+        var newGame = GameModel()
+        newGame.player1 = game.player1
+        newGame.player2 = game.player2
+        game = newGame
         //reset view.
         for view in self.view.subviews {
             view.removeFromSuperview()
