@@ -75,8 +75,7 @@ struct GameModel {
         numOfTurns += 1
         
         if numOfTurns > 4 {
-            checkForWinner(row: move.row,column:move.column)
-            print(winner)
+            checkForWinner(row: move.row,column: move.column)
         }
         
     }
@@ -85,30 +84,29 @@ struct GameModel {
         var winSum:Int{
             return currentPlayer == player1 ? 3 : 15
         }
+        
         if rowsValues[row] == winSum || columnValues[column] == winSum {
             winner = true
-            return
+            
         }
         if row == 0 && column == 0 || row == 2 && column == 2{
             if diagonalValuesLtR == winSum{
                 winner = true
-                return
             }
         }
         
         if row == 0 && column == 2 || row == 2 && column == 0{
             if diagonalValuesRtL == winSum{
                 winner = true
-                return
             }
         }
         if row == 1 && column == 1 {
             if rowsValues[row] == winSum || columnValues[column] == winSum
             || diagonalValuesLtR == winSum || diagonalValuesRtL == winSum{
                 winner = true
-                return
             }
         }
+        
     }
     
     mutating func computerTurn() -> Int{
@@ -132,4 +130,6 @@ struct GameModel {
     }
    return player
     }
+    
+    
 }

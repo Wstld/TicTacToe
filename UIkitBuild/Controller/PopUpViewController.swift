@@ -6,12 +6,12 @@
 //
 
 import UIKit
-class PopUpViewController: UIViewController {
+class PopUpViewController: UIAlertController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        var screenWidth = UIScreen.main.bounds.width < UIScreen.main.bounds.height ? UIScreen.main.bounds.width : UIScreen.main.bounds.height
-        view = UIView()
-        view.backgroundColor = .clear
+        title = "Hej"
+        message = "test"
+        
     }
 
 }

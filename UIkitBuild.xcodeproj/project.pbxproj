@@ -18,7 +18,6 @@
 		ADC7ED4325893EC600B89659 /* GameBoard.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC7ED4225893EC600B89659 /* GameBoard.swift */; };
 		ADC7ED54258AB10800B89659 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC7ED53258AB10800B89659 /* GameModel.swift */; };
 		ADC7ED5925925F3300B89659 /* ScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC7ED5825925F3300B89659 /* ScoreModel.swift */; };
-		ADC7ED6E2592702F00B89659 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC7ED6D2592702F00B89659 /* PopUpViewController.swift */; };
 		ADC7ED7325927B6100B89659 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC7ED7225927B6100B89659 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +56,6 @@
 		ADC7ED4225893EC600B89659 /* GameBoard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameBoard.swift; sourceTree = "<group>"; };
 		ADC7ED53258AB10800B89659 /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		ADC7ED5825925F3300B89659 /* ScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreModel.swift; sourceTree = "<group>"; };
-		ADC7ED6D2592702F00B89659 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		ADC7ED7225927B6100B89659 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -152,7 +150,6 @@
 			isa = PBXGroup;
 			children = (
 				ADB4CFD82588BFEE00DCC4DC /* GameBoardViewController.swift */,
-				ADC7ED6D2592702F00B89659 /* PopUpViewController.swift */,
 				ADC7ED7225927B6100B89659 /* MainViewController.swift */,
 			);
 			path = Controller;
@@ -307,7 +304,6 @@
 			files = (
 				ADC7ED5925925F3300B89659 /* ScoreModel.swift in Sources */,
 				ADC7ED54258AB10800B89659 /* GameModel.swift in Sources */,
-				ADC7ED6E2592702F00B89659 /* PopUpViewController.swift in Sources */,
 				ADC7ED4325893EC600B89659 /* GameBoard.swift in Sources */,
 				ADB4CFD92588BFEE00DCC4DC /* GameBoardViewController.swift in Sources */,
 				ADB4CFD52588BFEE00DCC4DC /* AppDelegate.swift in Sources */,

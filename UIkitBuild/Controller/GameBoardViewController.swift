@@ -32,15 +32,7 @@ class GameBoardViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if game.soloPlayer && game.currentPlayer == game.player2{
-            let btn = game.computerTurn()
-            
-            let button = gameBoard.allBtns.filter{
-                button in return button.tag == btn
-            }
-            
-            button[0].sendActions(for: .touchUpInside)
-        }
+       
         // Do any additional setup after loading the view.
         
     
@@ -99,6 +91,7 @@ class GameBoardViewController: UIViewController{
             }
             //Updates game board array and checks for winner
             self.game.updateGameBoard(btnNumber: btn.tag)
+            
           
             if self.game.winner {
                 if self.game.currentPlayer == self.game.player1{
@@ -106,12 +99,16 @@ class GameBoardViewController: UIViewController{
                 }else{
                     self.scoreBoard.addWin(player: "O")
                 }
-                //show new screen with winner popup and wanna play again.
                 
-                 self.resetGame()
-            }else if self.game.numOfTurns >= 9 && !self.game.winner {
-                //show popup with draw and options to play again.
-                self.resetGame()
+                // Show popup with winner
+                self.showEndOfGameDialog(messageToUserd: "\(self.game.currentPlayer) won!")
+              
+            }
+        
+            
+            if self.game.numOfTurns == 9 && !self.game.winner{
+                //show popup with draw
+                self.showEndOfGameDialog(messageToUserd: "It was a draw!")
                 
             }
   
@@ -127,9 +124,8 @@ class GameBoardViewController: UIViewController{
             self.currentPlayerLable.text = self.game.currentPlayer
             
             //If solo game runs computers turn
-            if self.game.soloPlayer && self.game.currentPlayer == self.game.player2{
+            if self.game.soloPlayer && self.game.currentPlayer == self.game.player2 && self.game.numOfTurns < 9{
                 let btn = self.game.computerTurn()
-                print(btn)
                 let button = self.gameBoard.allBtns.filter{
                     button in return button.tag == btn
                     
@@ -183,6 +179,38 @@ class GameBoardViewController: UIViewController{
             statsHeadline.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor)
              
          ])
+        if game.soloPlayer && game.currentPlayer == game.player2{
+            let btn = game.computerTurn()
+            
+            let button = gameBoard.allBtns.filter{
+                button in return button.tag == btn
+            }
+            
+            button[0].sendActions(for: .touchUpInside)
+        }
+    }
+    
+    func showEndOfGameDialog(messageToUserd:String){
+        let dialog = UIAlertController(title: messageToUserd, message:"play another round?" , preferredStyle: .alert)
+        
+        //Create alert btns
+        let yesBtn = UIAlertAction(title: "Yes", style: .default) { (UIAlertAction) in
+            self.resetGame()
+        }
+        
+        let noBtn = UIAlertAction(title: "No", style: .cancel) { (UIAlertAction) in
+            let main = self.storyboard?.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+            self.navigationController?.pushViewController(main, animated: true)
+
+        }
+        //add actions to dialog
+        dialog.addAction(noBtn)
+        dialog.addAction(yesBtn)
+        
+        
+        
+        //Show dialog
+        self.present(dialog, animated: true, completion: nil)
     }
     
     func resetGame(){
