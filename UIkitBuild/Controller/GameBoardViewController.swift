@@ -21,10 +21,10 @@ class GameBoardViewController: UIViewController{
     var player1ScoreLable:UILabel!
     var player2ScoreLable:UILabel!
     override func loadView() {
-        
         //Main Canvas.
         view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .gray
+        
 
         self.setupView(view:view)
  
@@ -32,7 +32,7 @@ class GameBoardViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        overrideUserInterfaceStyle = .dark
         // Do any additional setup after loading the view.
         
     
@@ -54,7 +54,15 @@ class GameBoardViewController: UIViewController{
         statsHeadline = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth/3, height: screenWidth/6))
         statsHeadline.translatesAutoresizingMaskIntoConstraints = false
         statsHeadline.font = UIFont.systemFont(ofSize: 40)
-        statsHeadline.text = "Score"
+        statsHeadline.layer.borderWidth = 2
+        statsHeadline.layer.borderColor = UIColor.white.cgColor
+        statsHeadline.layer.cornerRadius = 10
+        statsHeadline.shadowColor = .black
+        statsHeadline.layer.shadowOpacity = 0.3
+        statsHeadline.text = " Score "
+        statsHeadline.backgroundColor = .darkGray
+        statsHeadline.clipsToBounds = true
+        statsHeadline.insetsLayoutMarginsFromSafeArea = true
         
         player1NameLable = UILabel(frame: CGRect(x: 0, y: 0, width: screenWidth/3, height: screenWidth/6))
         player1NameLable.translatesAutoresizingMaskIntoConstraints = false
@@ -102,6 +110,7 @@ class GameBoardViewController: UIViewController{
                 
                 // Show popup with winner
                 self.showEndOfGameDialog(messageToUserd: "\(self.game.currentPlayer) won!")
+                
               
             }
         
@@ -124,7 +133,10 @@ class GameBoardViewController: UIViewController{
             self.currentPlayerLable.text = self.game.currentPlayer
             
             //If solo game runs computers turn
-            if self.game.soloPlayer && self.game.currentPlayer == self.game.player2 && self.game.numOfTurns < 9{
+            if self.game.soloPlayer &&
+                self.game.currentPlayer == self.game.player2 &&
+                self.game.numOfTurns < 9 &&
+                !self.game.winner{
                 let btn = self.game.computerTurn()
                 let button = self.gameBoard.allBtns.filter{
                     button in return button.tag == btn
@@ -175,7 +187,7 @@ class GameBoardViewController: UIViewController{
             player1ScoreLable.bottomAnchor.constraint(equalTo: player1NameLable.bottomAnchor),
             
             //Stats Headline lable
-            statsHeadline.bottomAnchor.constraint(equalTo: player1NameLable.topAnchor,constant: 10),
+            statsHeadline.bottomAnchor.constraint(equalTo: player1NameLable.topAnchor,constant: -5),
             statsHeadline.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor)
              
          ])

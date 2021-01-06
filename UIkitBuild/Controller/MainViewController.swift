@@ -7,6 +7,7 @@
 
 import UIKit
 class MainViewController: UIViewController {
+    var gameLogo:UIImageView!
     var pVpBtn:UIButton!
     var pVcBtn:UIButton!
     var startGameBtn:UIButton!
@@ -26,16 +27,25 @@ class MainViewController: UIViewController {
     
     override func loadView() {
         view = UIView()
-        view.backgroundColor = .white
+        view.backgroundColor = .darkGray
         setupView()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .dark
         //stuff here.
     }
     
     private func setupView(){
     //Instances and setup subviews
+        let image = UIImage(named: "XO.png")
+        gameLogo = UIImageView()
+        gameLogo.translatesAutoresizingMaskIntoConstraints = false
+        gameLogo.image = image
+        gameLogo.contentMode = .scaleAspectFit
+  
+    
+        
         pVpContainer = UIView()
         pVpContainer.translatesAutoresizingMaskIntoConstraints = false
         pVpContainer.backgroundColor = .clear
@@ -97,6 +107,7 @@ class MainViewController: UIViewController {
         pVcContainer.addSubview(startOnePlayerGameBtn)
         pVcContainer.addSubview(nameInputOnePlayer)
         
+        view.addSubview(gameLogo)
         view.addSubview(pVcBtn)
         view.addSubview(pVpBtn)
         view.addSubview(pVpContainer)
@@ -106,6 +117,11 @@ class MainViewController: UIViewController {
     
   func setupConstraints(){
         NSLayoutConstraint.activate([
+            //gameLogo
+            gameLogo.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+            gameLogo.bottomAnchor.constraint(equalTo: view.centerYAnchor,constant: -20),
+            gameLogo.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+            gameLogo.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
             //pvcContainer
             pVcContainer.leftAnchor.constraint(equalTo: view.leftAnchor,constant: screenWidth/3),
             pVcContainer.rightAnchor.constraint(equalTo: view.rightAnchor,constant: screenWidth/3 * -1),
@@ -143,7 +159,7 @@ class MainViewController: UIViewController {
             //2 players button
             pVpBtn.leftAnchor.constraint(equalTo: view.leftAnchor,constant: screenWidth/3),
             pVpBtn.rightAnchor.constraint(equalTo: view.rightAnchor,constant: screenWidth/3 * -1),
-            pVpBtn.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor,constant: 100),
+            pVpBtn.topAnchor.constraint(equalTo: gameLogo.bottomAnchor,constant: 10),
             
             //1 player button
             pVcBtn.leftAnchor.constraint(equalTo: view.leftAnchor,constant: screenWidth/3),
